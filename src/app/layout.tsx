@@ -1,3 +1,4 @@
+import { Toaster } from "@/components/ui/sonner";
 import { dbConnect } from "@/db/connect";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
@@ -32,6 +33,7 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        <Toaster />
       </body>
     </html>
   );

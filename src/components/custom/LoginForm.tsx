@@ -3,12 +3,15 @@
 import { loginUser } from "@/server actions";
 import { motion } from "framer-motion";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast } from "sonner";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -17,10 +20,11 @@ const LoginForm = () => {
       console.log(email, password);
       const user = await loginUser(email, password);
       if (user) {
-        console.log(user);
+        toast("user logged in successfully");
+        router.push("/management");
       }
     } catch (error) {
-      console.log(error);
+      toast(error?.message);
     }
   };
   return (
