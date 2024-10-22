@@ -1,13 +1,13 @@
-import type { Config } from "tailwindcss"
+import type { Config } from "tailwindcss";
 
 const config = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-	],
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   prefix: "",
   theme: {
     container: {
@@ -18,6 +18,20 @@ const config = {
       },
     },
     extend: {
+      backgroundImage: {
+        "portfolio-gradient":
+          "linear-gradient(to right, var(--tw-gradient-stops))",
+      },
+      gradientColorStops: {
+        portfolio: {
+          start: "#22d3ee", // cyan-400
+          middle: "#3b82f6", // blue-500
+          end: "#9333ea", // purple-600
+        },
+      },
+      textColor: {
+        "portfolio-gradient": "var(--portfolio-gradient)",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -74,7 +88,20 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
-} satisfies Config
+  plugins: [
+    require("tailwindcss-animate"),
+    function ({ addBase, theme }) {
+      addBase({
+        ":root": {
+          "--portfolio-gradient": `linear-gradient(to right, ${theme(
+            "gradientColorStops.portfolio.start"
+          )}, ${theme("gradientColorStops.portfolio.middle")}, ${theme(
+            "gradientColorStops.portfolio.end"
+          )})`,
+        },
+      });
+    },
+  ],
+} satisfies Config;
 
-export default config
+export default config;
