@@ -1,3 +1,4 @@
+import { dbConnect } from "@/db/connect";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -19,11 +20,12 @@ export const metadata: Metadata = {
     "Web Developer | React Developer |  Next.js Developer | Frontend Developer | MERN Developer",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  await dbConnect();
   return (
     <html lang="en" className="dark">
       <body
