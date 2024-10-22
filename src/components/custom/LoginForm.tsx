@@ -17,13 +17,12 @@ const LoginForm = () => {
     e.preventDefault();
     // Handle login logic here
     try {
-      console.log(email, password);
       const user = await loginUser(email, password);
       if (user) {
         toast("user logged in successfully");
         router.push("/management");
       }
-    } catch (error) {
+    } catch (error: Record<string, undefined> | any | unknown) {
       toast(error?.message);
     }
   };

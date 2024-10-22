@@ -1,4 +1,5 @@
 "use client";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
 import { IconArrowLeft, IconBrandTabler } from "@tabler/icons-react";
@@ -88,8 +89,8 @@ export default function SidebarDemo({ children }: { children: ReactNode }) {
 
       <div className="flex flex-1">
         <div className="p-2 md:p-10 rounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 flex flex-col gap-2 flex-1 w-full h-full">
+          <ScrollArea>{children}</ScrollArea>
           {/* write your code here */}
-          {children}
         </div>
       </div>
     </div>
