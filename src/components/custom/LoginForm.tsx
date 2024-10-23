@@ -22,8 +22,8 @@ const LoginForm = () => {
         toast("user logged in successfully");
         router.push("/management");
       }
-    } catch (error: Record<string, undefined> | any | unknown) {
-      toast(error?.message);
+    } catch (error) {
+      console.log(error);
     }
   };
   return (

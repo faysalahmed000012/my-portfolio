@@ -1,5 +1,5 @@
 "use client";
-import man from "@/assets/images/download.jpeg";
+import myPhoto from "@/assets/images/myPhoto.jpg";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
@@ -20,7 +20,7 @@ const HeroImage = () => {
         >
           <Image
             className="w-[370px] h-[370px] rounded-full object-cover"
-            src={man}
+            src={myPhoto}
             alt="me"
             width={370}
             height={370}

@@ -4,7 +4,7 @@ export interface IBlog {
   _id?: string;
   title: string;
   description: string;
-  time: Date;
+  time: number;
 }
 
 const BlogSchema = new Schema<IBlog>({
@@ -18,7 +18,7 @@ const BlogSchema = new Schema<IBlog>({
   },
   time: {
     required: false,
-    type: Date,
+    type: Number,
   },
 });
 

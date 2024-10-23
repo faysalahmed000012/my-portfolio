@@ -33,7 +33,7 @@ const HeroText = () => {
       transition={{ duration: 0.5 }}
     >
       <h1 className="text-lg ">
-        Hello, I'm Misbahul Haq <span className="waving-hand">👋</span>
+        Hello, I&lsquo;m Misbahul Haq <span className="waving-hand">👋</span>
       </h1>
 
       <TypewriterEffectSmooth className="mt-0 mb-3 " words={words} />

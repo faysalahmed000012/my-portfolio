@@ -3,10 +3,9 @@ import arrowUp from "@/assets/images/arrow-up.png";
 import terminal from "@/assets/images/terminal.png";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 const Contact = () => {
-  const formRef = useRef();
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     name: "",
@@ -14,10 +13,14 @@ const Contact = () => {
     message: "",
   });
 
-  const handleChange = ({ target: { name, value } }) => {
+  const handleChange = ({
+    target: { name, value },
+  }: {
+    target: { name: string; value: string };
+  }) => {
     setForm({ ...form, [name]: value });
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setTimeout(() => {
@@ -28,11 +31,11 @@ const Contact = () => {
         email: "",
         message: "",
       });
-    }, [2000]);
+    }, 2000);
   };
 
   return (
-    <section className="max-w-7xl mx-auto c-space my-20">
+    <section id="contact" className="max-w-7xl mx-auto c-space my-20">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -55,7 +58,6 @@ absolute inset-0 min-h-screen"
           </p>
 
           <form
-            ref={formRef}
             onSubmit={handleSubmit}
             className="mt-12 flex flex-col space-y-3"
           >

@@ -17,19 +17,20 @@ async function createBlog(credential: IBlog) {
 
 async function getBlogById(id: string) {
   await dbConnect();
+
   const blog = await Blog.findById(id).lean();
   return JSON.stringify(blog);
 }
 
 async function deleteBlog(id: string) {
-  await dbConnect();
+  console.log(id);
   const blog = await Blog.findByIdAndDelete(id);
   return JSON.stringify(blog);
 }
 
-async function editBlog(credential: Partial<IBlog>) {
+async function editBlog(credential: Partial<IBlog>, id: string) {
   await dbConnect();
-  const blog = await Blog.findByIdAndUpdate(credential._id, credential, {
+  const blog = await Blog.findByIdAndUpdate(id, credential, {
     new: true,
   });
 

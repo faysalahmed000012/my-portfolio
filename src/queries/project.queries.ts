@@ -27,9 +27,9 @@ async function deleteProject(id: string) {
   return JSON.stringify(project);
 }
 
-async function editProject(credential: Partial<IProject>) {
+async function editProject(credential: Partial<IProject>, id: string) {
   await dbConnect();
-  const project = await Project.findByIdAndUpdate(credential._id, credential, {
+  const project = await Project.findByIdAndUpdate(id, credential, {
     new: true,
   });
 

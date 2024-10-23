@@ -9,8 +9,10 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
+import { createSkillAction } from "@/server actions";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useState } from "react";
+import { toast } from "sonner";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -28,10 +30,18 @@ export default function AddSkill() {
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle blog creation logic here
-    console.log("Blog created:", { image, name, category });
+
+    try {
+      const response = await createSkillAction({ name, category, image });
+      if (response) {
+        toast.success("Skill Added Successfully");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
     setIsOpen(false);
     setImage("");
     setName("");
@@ -154,7 +164,7 @@ export default function AddSkill() {
                       type="submit"
                       className="portfolio-gradient text-white"
                     >
-                      Create Blog
+                      Create Skill
                     </Button>
                   </motion.div>
                 </div>

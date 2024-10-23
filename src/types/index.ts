@@ -1,5 +1,6 @@
 export type Skill = {
-  id: number;
+  _id?: string;
+  id?: number;
   name: string;
   icon: string;
 };

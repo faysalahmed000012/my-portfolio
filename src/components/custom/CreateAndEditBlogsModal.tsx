@@ -12,34 +12,79 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { IBlog } from "@/models/blog.model";
+import { createBlogAction, editBlogAction } from "@/server actions";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
+import { toast } from "sonner";
 
-export default function CreateAndEditBlog() {
+export default function CreateAndEditBlog({
+  isEditMode = false,
+  data = null,
+}: {
+  isEditMode?: boolean;
+  data?: IBlog | null;
+}) {
   const [isOpen, setIsOpen] = useState(false);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState(isEditMode ? data?.title : "");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [description, setDescription] = useState(
+    isEditMode ? data?.description : ""
+  );
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const time = Date.now();
     // Handle blog creation logic here
-    console.log("Blog created:", { title, description });
-    setIsOpen(false);
-    setTitle("");
-    setDescription("");
+    if (!title || !description) {
+      toast.error("Please fill in all fields");
+    } else {
+      let response;
+      if (isEditMode) {
+        response = await editBlogAction(
+          { title, description, time },
+          data?._id as string
+        );
+
+        console.log(title);
+        if (response) {
+          toast("Blog Edited Successfully");
+          console.log(response);
+        }
+      } else {
+        response = await createBlogAction({ title, description, time });
+        if (response) {
+          toast("Blog Created Successfully");
+          console.log(response);
+        }
+      }
+
+      setIsOpen(false);
+      setTitle("");
+      setDescription("");
+    }
   };
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="px-4 py-2 portfolio-gradient text-white rounded-md shadow-lg mt-10 ms-3 active:scale-95 transition-all duration-300 ease-in-out"
-        >
-          Create New Blog
-        </motion.button>
-      </DialogTrigger>
+      {isEditMode ? (
+        <DialogTrigger asChild>
+          <Button variant="outline" className=" ">
+            Edit
+          </Button>
+        </DialogTrigger>
+      ) : (
+        <DialogTrigger asChild>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="px-4 py-2 portfolio-gradient text-white rounded-md shadow-lg mt-10 ms-3 active:scale-95 transition-all duration-300 ease-in-out"
+          >
+            Create New Blog
+          </motion.button>
+        </DialogTrigger>
+      )}
+
       <AnimatePresence>
         {isOpen && (
           <DialogContent className="sm:max-w-[425px] text-white border border-gray-700 p-0 overflow-hidden">
@@ -51,7 +96,7 @@ export default function CreateAndEditBlog() {
             >
               <DialogHeader className="p-6 pb-0">
                 <DialogTitle className="text-2xl font-bold portfolio-gradient-text">
-                  Create New Blog
+                  {isEditMode ? "Edit" : "Create New"} Blog
                 </DialogTitle>
                 <DialogDescription className="text-gray-400">
                   Fill in the details for your new blog post.
@@ -117,7 +162,7 @@ export default function CreateAndEditBlog() {
                       type="submit"
                       className="portfolio-gradient text-white"
                     >
-                      Create Blog
+                      {isEditMode ? "Edit" : "Create"} Blog
                     </Button>
                   </motion.div>
                 </div>

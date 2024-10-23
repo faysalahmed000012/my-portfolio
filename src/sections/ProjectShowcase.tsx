@@ -9,13 +9,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { IProject } from "@/models/project.model";
-import { deleteProjectAction } from "@/server actions";
 import { motion } from "framer-motion";
-import { DeleteIcon, Github } from "lucide-react";
+import { Github } from "lucide-react";
 import Image from "next/image";
-import AddEditProjectModal from "./AddEditProjectModal";
 
-export default function ProjectsManagement({
+export default function ProjectShowcase({
   projects,
 }: {
   projects: IProject[];
@@ -27,7 +25,6 @@ export default function ProjectsManagement({
           <h2 className="text-3xl font-bold mb-8 portfolio-gradient-text">
             My Projects
           </h2>
-          <AddEditProjectModal />
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects?.map((project, index) => (
@@ -74,19 +71,7 @@ export default function ProjectsManagement({
                         Backend
                       </a>
                     </Button>
-                    <AddEditProjectModal isEditMode={true} data={project} />
                   </div>
-                  <Button
-                    onClick={async () =>
-                      await deleteProjectAction(project._id as string)
-                    }
-                    className="flex items-center justify-center mt-3"
-                    variant="destructive"
-                    size="sm"
-                  >
-                    <DeleteIcon className=" mr-2 h-4 w-4" />
-                    Delete
-                  </Button>
                 </CardContent>
                 <CardFooter className="mt-auto">
                   <Button className="w-full" asChild>

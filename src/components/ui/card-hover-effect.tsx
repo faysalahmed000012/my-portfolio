@@ -1,22 +1,20 @@
 "use client";
 import { cn } from "@/lib/utils";
+import { IBlog } from "@/models/blog.model";
+import { deleteBlogAction } from "@/server actions";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
+import CreateAndEditBlog from "../custom/CreateAndEditBlogsModal";
 import { Button } from "./button";
 
 export const HoverEffect = ({
   items,
   className,
 }: {
-  items: {
-    title: string;
-    description: string;
-    link: string;
-  }[];
+  items: IBlog[];
   className?: string;
 }) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-
   return (
     <div
       className={cn(
@@ -26,7 +24,7 @@ export const HoverEffect = ({
     >
       {items.map((item, idx) => (
         <div
-          key={item?.link}
+          key={item?._id}
           className="relative group  block p-2 h-full w-full"
           onMouseEnter={() => setHoveredIndex(idx)}
           onMouseLeave={() => setHoveredIndex(null)}
@@ -52,10 +50,12 @@ export const HoverEffect = ({
             <CardTitle>{item.title}</CardTitle>
             <CardDescription>{item.description}</CardDescription>
             <div className="mt-10 mb-0 flex items-center justify-between">
-              <Button variant="outline" className=" ">
-                Edit
-              </Button>
-              <Button variant="destructive" className="">
+              <CreateAndEditBlog isEditMode={true} data={item} />
+              <Button
+                onClick={async () => await deleteBlogAction(item._id as string)}
+                variant="destructive"
+                className=""
+              >
                 Delete
               </Button>
             </div>

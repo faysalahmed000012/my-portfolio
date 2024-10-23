@@ -1,11 +1,13 @@
 "use client";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { Button } from "@/components/ui/button";
 import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
+import { logOutUser } from "@/server actions";
 import { IconArrowLeft, IconBrandTabler } from "@tabler/icons-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ReactNode, useState } from "react";
 import { HiOutlineBriefcase } from "react-icons/hi";
 import { HiOutlineCog } from "react-icons/hi2";
@@ -41,15 +43,17 @@ export default function SidebarDemo({ children }: { children: ReactNode }) {
         <HiOutlineBriefcase className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
       ),
     },
-    {
-      label: "Logout",
-      href: "#",
-      icon: (
-        <IconArrowLeft className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
-      ),
-    },
   ];
   const [open, setOpen] = useState(false);
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    const res = await logOutUser();
+    if (res) {
+      router.push("/");
+    }
+  };
+
   return (
     <div
       className={cn(
@@ -65,6 +69,10 @@ export default function SidebarDemo({ children }: { children: ReactNode }) {
               {links.map((link, idx) => (
                 <SidebarLink key={idx} link={link} />
               ))}
+              <Button onClick={() => handleLogout()}>
+                <IconArrowLeft className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+                Logout
+              </Button>
             </div>
           </div>
           <div>
@@ -89,7 +97,8 @@ export default function SidebarDemo({ children }: { children: ReactNode }) {
 
       <div className="flex flex-1">
         <div className="p-2 md:p-10 rounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 flex flex-col gap-2 flex-1 w-full h-full">
-          <ScrollArea>{children}</ScrollArea>
+          <div className="max-h-screen overflow-y-scroll">{children}</div>
+
           {/* write your code here */}
         </div>
       </div>
@@ -99,7 +108,7 @@ export default function SidebarDemo({ children }: { children: ReactNode }) {
 export const Logo = () => {
   return (
     <Link
-      href="/management"
+      href="/"
       className="font-normal flex space-x-2 items-center text-sm text-black py-1 relative z-20"
     >
       <div className="h-5 w-6 bg-black dark:bg-white rounded-br-lg rounded-tr-sm rounded-tl-lg rounded-bl-sm flex-shrink-0" />
