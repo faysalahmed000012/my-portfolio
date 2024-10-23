@@ -50,9 +50,12 @@ const BlogCard = ({ blog }: { blog: IBlog }) => {
           </div>
         </CardHeader>
         <CardContent className="p-4">
-          <p className="text-gray-600 dark:text-gray-300">
-            {truncateDescription(description, 20)}
-          </p>
+          <div
+            className="text-gray-600 dark:text-gray-300"
+            dangerouslySetInnerHTML={{
+              __html: truncateDescription(description, 20),
+            }}
+          ></div>
         </CardContent>
         <CardFooter className="p-4">
           <Link href={`/blogs/${slug}`} passHref>

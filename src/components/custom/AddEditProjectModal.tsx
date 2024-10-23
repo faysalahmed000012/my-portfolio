@@ -130,7 +130,7 @@ export default function AddEditProjectModal({
         </DialogTrigger>
       )}
 
-      <DialogContent className="max-h-[90vh] overflow-y-scroll sm:max-w-[425px] dark:bg-gray-900">
+      <DialogContent className="max-h-[90vh] overflow-auto sm:max-w-[425px] dark:bg-gray-900">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold dark:text-white">
             {isEditMode ? "Edit" : "Add New"} Project

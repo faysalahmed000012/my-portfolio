@@ -19,7 +19,10 @@ const page = async ({ params }: { params: { blogId: string } }) => {
         <p>By: Misbahul Haq</p>
         <p>{formattedDate}</p>
       </div>
-      <p className="mt-10 mb-10 text-lg">{parsedBlog.description}</p>
+      <div
+        className="mt-10 mb-10 text-lg"
+        dangerouslySetInnerHTML={{ __html: parsedBlog.description }}
+      ></div>
       <Link
         className="mt-10 border border-input bg-background hover:bg-accent hover:text-accent-foreground  px-6 py-3"
         href="/"

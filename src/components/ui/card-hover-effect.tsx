@@ -48,7 +48,9 @@ export const HoverEffect = ({
           </AnimatePresence>
           <Card>
             <CardTitle>{item.title}</CardTitle>
-            <CardDescription>{item.description}</CardDescription>
+            <CardDescription>
+              <div dangerouslySetInnerHTML={{ __html: item.description }}></div>
+            </CardDescription>
             <div className="mt-10 mb-0 flex items-center justify-between">
               <CreateAndEditBlog isEditMode={true} data={item} />
               <Button

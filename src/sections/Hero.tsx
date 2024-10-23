@@ -4,7 +4,7 @@ import { BackgroundBeams } from "@/components/ui/background-beams";
 
 const Hero = () => {
   return (
-    <div className="relative antialiased">
+    <div id="home" className="relative antialiased">
       <div className="fixed left-0 top-0 -z-20 h-screen w-screen">
         <div className="relative h-screen w-full bg-black">
           <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>

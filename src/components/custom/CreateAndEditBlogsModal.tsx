@@ -11,12 +11,12 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { IBlog } from "@/models/blog.model";
 import { createBlogAction, editBlogAction } from "@/server actions";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { toast } from "sonner";
+import Tiptap from "./Tiptap";
 
 export default function CreateAndEditBlog({
   isEditMode = false,
@@ -37,7 +37,8 @@ export default function CreateAndEditBlog({
     const time = Date.now();
     // Handle blog creation logic here
     if (!title || !description) {
-      toast.error("Please fill in all fields");
+      alert("Please  fill in all fields");
+      return;
     } else {
       let response;
       if (isEditMode) {
@@ -87,7 +88,7 @@ export default function CreateAndEditBlog({
 
       <AnimatePresence>
         {isOpen && (
-          <DialogContent className="sm:max-w-[425px] text-white border border-gray-700 p-0 overflow-hidden">
+          <DialogContent className="sm:max-w-[425px] text-white border border-gray-700 p-0 max-h-[95vh] overflow-auto">
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -129,15 +130,12 @@ export default function CreateAndEditBlog({
                     Description
                   </Label>
                   <motion.div whileTap={{ scale: 0.99 }}>
-                    <Textarea
-                      id="description"
-                      value={description}
-                      onChange={(e) => setDescription(e.target.value)}
-                      className="w-full bg-gray-800 text-white border-gray-700 focus:border-blue-500 focus:ring-blue-500"
-                      placeholder="Enter blog description"
-                      rows={4}
-                      required
-                    />
+                    <div onClick={(e) => e.preventDefault()}>
+                      <Tiptap
+                        defaultValue={description || ""}
+                        onChange={setDescription}
+                      />
+                    </div>
                   </motion.div>
                 </div>
                 <div className="flex justify-end space-x-2 pt-4">
