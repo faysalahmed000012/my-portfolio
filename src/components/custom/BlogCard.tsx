@@ -39,7 +39,7 @@ const BlogCard = ({ blog }: { blog: IBlog }) => {
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
     >
-      <Card className="w-full max-w-sm mx-auto overflow-hidden transition-all duration-300 ease-in-out hover:shadow-lg dark:border-gray-700 hover:scale-105">
+      <Card className="w-full max-w-sm mx-auto overflow-hidden transition-all duration-300 ease-in-out hover:shadow-lg hover:border dark:hover:border-sky-500 dark:border-gray-700 hover:scale-105">
         <CardHeader className="p-4">
           <CardTitle className="text-xl font-bold line-clamp-2 portfolio-gradient-text">
             {title}

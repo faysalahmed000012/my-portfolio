@@ -48,7 +48,7 @@ const HeroText = () => {
         initialText={
           <span className="group inline-flex items-center">
             <a
-              href="/Misbahul Haq's Resume2.pdf"
+              href="/Misbahul Haq_ MERN stack web-developer.pdf"
               target="_blank"
               rel="noopener noreferrer"
             >

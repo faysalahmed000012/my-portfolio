@@ -1,5 +1,5 @@
 "use client";
-import myPhoto from "@/assets/images/myPhoto.jpg";
+import myPhoto from "@/assets/images/myPhoto2.jpg";
 import { motion } from "framer-motion";
 import Image from "next/image";
 

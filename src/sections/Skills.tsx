@@ -12,7 +12,7 @@ import Image from "next/image";
 
 const SkillCard = ({ title, skills }: { title: string; skills: ISkill[] }) => {
   return (
-    <Card className="border border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <Card className="border border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 hover:border hover:border-sky-500 transition-all duration-300 ease-in-out">
       <CardHeader>
         <CardTitle className="text-lg font-semibold portfolio-gradient-text">
           {title}

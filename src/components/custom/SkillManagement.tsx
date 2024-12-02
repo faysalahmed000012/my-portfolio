@@ -15,7 +15,7 @@ import AddSkill from "./AddSkillModal";
 
 const SkillCard = ({ title, skills }: { title: string; skills: ISkill[] }) => {
   return (
-    <Card className="border border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <Card className="border border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 ">
       <CardHeader>
         <CardTitle className="text-lg font-semibold portfolio-gradient-text">
           {title}

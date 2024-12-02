@@ -35,14 +35,14 @@ export default function ProjectShowcase({
               transition={{ delay: 0.2 * index }}
               className="h-full"
             >
-              <Card className="flex flex-col h-full">
-                <div className=" w-full h-[300px] overflow-hidden">
+              <Card className="flex flex-col h-full hover:border hover:border-sky-500 hover:scale-105 transition-all duration-300 ease-in-out">
+                <div className="w-full h-[300px] overflow-hidden">
                   <Image
                     src={project?.image}
                     width={400}
                     height={320}
                     alt={project?.title}
-                    className="rounded-t-lg hover:translate-y-[-50%] transition-all duration-300 ease-in-out"
+                    className="w-full rounded-t-lg  transition-all duration-300 ease-in-out"
                   />
                 </div>
                 <CardHeader>
